@@ -1,3 +1,6 @@
+import Foundation
+import UIKit
+
 @objc(Bulbsdk)
 class Bulbsdk: NSObject {
 
