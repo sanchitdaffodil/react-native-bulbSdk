@@ -1,0 +1,11 @@
+framework module BulbshareSDK {
+  umbrella header "BulbshareSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module BulbshareSDK.Swift {
+    header "BulbshareSDK-Swift.h"
+    requires objc
+}

@@ -1,0 +1,47 @@
+PODS:
+  - BulbshareSDK (0.1.1)
+  - IQKeyboardManagerSwift (6.5.9)
+  - KeychainAccess (4.2.2)
+  - Koloda (5.0.1):
+    - pop (~> 1.0)
+  - MBProgressHUD (1.2.0)
+  - pop (1.0.12)
+  - SDWebImage (4.4.8):
+    - SDWebImage/Core (= 4.4.8)
+  - SDWebImage/Core (4.4.8)
+  - SwiftLint (0.45.1)
+
+DEPENDENCIES:
+  - BulbshareSDK
+  - IQKeyboardManagerSwift
+  - KeychainAccess
+  - Koloda
+  - MBProgressHUD
+  - SDWebImage (~> 4.0)
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - IQKeyboardManagerSwift
+    - KeychainAccess
+    - Koloda
+    - MBProgressHUD
+    - pop
+    - SDWebImage
+    - SwiftLint
+  "https://sanchitsrivastava247@bitbucket.org/daffodilsoftware/bulbsharesdkpodspec.git":
+    - BulbshareSDK
+
+SPEC CHECKSUMS:
+  BulbshareSDK: 0af2333f3e1ded5332f032bf4d1a7c8db87e1a30
+  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  Koloda: d07b9199a383abc5898b62aa945a599f5e7c0c4b
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
+  SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
+
+PODFILE CHECKSUM: d3e68382a45901c98028c0599ead5e5df66f65af
+
+COCOAPODS: 1.11.2

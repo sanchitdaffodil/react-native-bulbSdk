@@ -1,0 +1,166 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-module-flags: -target arm64-apple-ios12.1-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name BulbshareSDK
+import AVFoundation
+import AVKit
+@_exported import BulbshareSDK
+import Foundation
+import IQKeyboardManagerSwift
+import ImageIO
+import KeychainAccess
+import Koloda
+import MBProgressHUD
+import SDWebImage
+import Swift
+import SwiftUI
+import SystemConfiguration
+import UIKit
+extension SDKError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var failureReason: Swift.String? {
+    get
+  }
+}
+public enum SDKError : Swift.Error {
+  public enum ApplicationError : Swift.String, Swift.Error {
+    case unknownError
+    case unauthorized
+    case deviceIsJailBreak
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum NetworkError : Swift.String, Swift.Error {
+    case noInternetConnection
+    case connectionTimeOut
+    case missingUrl
+    case unknownError
+    case internalServerError
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum ServerError : Swift.String, Swift.Error {
+    case unAuthorized
+    case unknownError
+    case userDoesNotExist
+    case invalidPassword
+    case invalid_arguments
+    case invalid_brief
+    case brief_not_exist
+    case brief_is_removed
+    case invalid_brief_type
+    case invalidComment
+    case invalidBriefCommentReference
+    case briefCommentNotExist
+    case briefCommentRemoved
+    case invalidPermissions
+    case invalidItemCount
+    case invalidPage
+    case invalidReturnStatusValue
+    case brandNotExist
+    case brandRemoved
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum JSONError : Swift.String, Swift.Error {
+    case jsonDecodeError
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  case applicationError(error: BulbshareSDK.SDKError.ApplicationError)
+  case networkError(error: BulbshareSDK.SDKError.NetworkError)
+  case serverError(reason: BulbshareSDK.SDKError.ServerError)
+  case jsonError(reason: BulbshareSDK.SDKError.JSONError)
+}
+public struct BSAuthenticationInput : Swift.Encodable {
+  public init(email: Swift.String, password: Swift.String)
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct BSSDKConfig {
+  public init()
+}
+public protocol BSAuthenticatioinDelegate : BulbshareSDK.BSErrorDelegate {
+  func onSuccessAuthentication()
+}
+public protocol BSBriefDelegate : BulbshareSDK.BSErrorDelegate {
+  func onSuccessBriefLoaded()
+}
+public protocol BSErrorDelegate : AnyObject {
+  func onSDKError(error: Swift.Error)
+}
+public protocol BSPollBriefDdelegate : BulbshareSDK.BSErrorDelegate {
+  func onSuccessPollBriefLoaded()
+}
+public protocol BSBriefIntroDelegate : BulbshareSDK.BSErrorDelegate {
+  func onSuccessBriefIntroLoaded()
+}
+public protocol BSBriefCommentDelegate : BulbshareSDK.BSErrorDelegate {
+  func onSuccessBriefCommentLoaded()
+}
+public protocol BSFeedDelegate : BulbshareSDK.BSErrorDelegate {
+  func onSuccessFeedLoaded()
+}
+extension UIImageView {
+  public func loadGif(name: Swift.String)
+}
+extension UIImage {
+  public class func gif(data: Foundation.Data) -> UIKit.UIImage?
+  public class func gif(url: Swift.String) -> UIKit.UIImage?
+  public class func gif(name: Swift.String) -> UIKit.UIImage?
+}
+@_hasMissingDesignatedInitializers public class BulbshareClient {
+  public static func shared(config: BulbshareSDK.BSSDKConfig) -> BulbshareSDK.BulbshareClient
+  weak public var authenticationDelegate: BulbshareSDK.BSAuthenticatioinDelegate?
+  public func authenticate(input: BulbshareSDK.BSAuthenticationInput)
+  weak public var feedDelegate: BulbshareSDK.BSFeedDelegate?
+  public func showFeed(navigation: UIKit.UINavigationController, input: BulbshareSDK.BSBriefInput)
+  weak public var pollbriefDelegate: BulbshareSDK.BSPollBriefDdelegate?
+  public func showPollBriefData(navigation: UIKit.UINavigationController, input: Swift.String)
+  weak public var briefDelegate: BulbshareSDK.BSBriefDelegate?
+  public func showBrief(navigation: UIKit.UINavigationController, input: BulbshareSDK.BSBriefInput)
+  weak public var briefIntroDelegate: BulbshareSDK.BSBriefIntroDelegate?
+  public func showBriefIntro(navigation: UIKit.UINavigationController, input: BulbshareSDK.BSBriefRefInput)
+  weak public var briefCommentDelegate: BulbshareSDK.BSBriefCommentDelegate?
+  public func showBriefComment(navigation: UIKit.UINavigationController, input: BulbshareSDK.BSBriefRefInput)
+  @objc deinit
+}
+public struct BSBriefRefInput : Swift.Encodable {
+  public init(briefRef: Swift.String)
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public protocol SDKSettingsProtocol {
+  static func sdkVersion() -> Swift.String
+}
+@_hasMissingDesignatedInitializers public class SDKSettings : BulbshareSDK.SDKSettingsProtocol {
+  public static func sdkVersion() -> Swift.String
+  @objc deinit
+}
+public struct BSBriefInput : Swift.Encodable {
+  public init(privateBrandId: Swift.Int)
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension BulbshareSDK.SDKError.ApplicationError : Swift.Equatable {}
+extension BulbshareSDK.SDKError.ApplicationError : Swift.Hashable {}
+extension BulbshareSDK.SDKError.ApplicationError : Swift.RawRepresentable {}
+extension BulbshareSDK.SDKError.ServerError : Swift.Equatable {}
+extension BulbshareSDK.SDKError.ServerError : Swift.Hashable {}
+extension BulbshareSDK.SDKError.ServerError : Swift.RawRepresentable {}
+extension BulbshareSDK.SDKError.JSONError : Swift.Equatable {}
+extension BulbshareSDK.SDKError.JSONError : Swift.Hashable {}
+extension BulbshareSDK.SDKError.JSONError : Swift.RawRepresentable {}
+extension BulbshareSDK.SDKError.NetworkError : Swift.Equatable {}
+extension BulbshareSDK.SDKError.NetworkError : Swift.Hashable {}
+extension BulbshareSDK.SDKError.NetworkError : Swift.RawRepresentable {}
