@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">networkmanger</string>
+    <string name="technical_error_msg">Some error occurred. Please try again.</string>
+    <string name="network_error_msg">Please check your internet connection.</string>
+</resources>

@@ -4,6 +4,7 @@ buildscript {
             google()
             mavenCentral()
             jcenter()
+
         }
 
         dependencies {
@@ -19,15 +20,18 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('Bulbsdk_compileSdkVersion', 29)
+    compileSdkVersion safeExtGet('Bulbsdk_compileSdkVersion', 31)
     defaultConfig {
-        minSdkVersion safeExtGet('Bulbsdk_minSdkVersion', 16)
-        targetSdkVersion safeExtGet('Bulbsdk_targetSdkVersion', 29)
+        minSdkVersion safeExtGet('Bulbsdk_minSdkVersion', 21)
+        targetSdkVersion safeExtGet('Bulbsdk_targetSdkVersion', 31)
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
     }
-
+  packagingOptions {
+    pickFirst  'META-INF/*'
+    pickFirst  '**'
+  }
     buildTypes {
         release {
             minifyEnabled false
@@ -36,6 +40,7 @@ android {
     lintOptions {
         disable 'GradleCompatible'
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -51,9 +56,28 @@ repositories {
     google()
     mavenCentral()
     jcenter()
+  flatDir {
+    dirs 'libs'
+  }
 }
 
 dependencies {
     //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+
+  implementation "com.facebook.react:react-native:+"  // From node_modules
+   /*  implementation files('app-release.aar')
+     implementation files('networkmanager-release.aar')*/
+  /*implementation(name:'app-release', ext:'aar')*/
+  implementation files('libs/app-release.aar')
+  implementation files('libs/networkmanager-release.aar')
+  implementation "androidx.multidex:multidex:2.0.1"
+
+/*
+  implementation project(path: ':app')
+*/
+
 }
