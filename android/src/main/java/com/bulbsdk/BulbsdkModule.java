@@ -1,14 +1,16 @@
 package com.bulbsdk;
 
-import androidx.annotation.NonNull;
 
+import android.support.annotation.NonNull;
+
+import com.bulbshare.sdksample.sdk.model.AuthenticateSdkRequest;
+import com.bulbshare.sdksample.sdk.sdkClient.BulbshareSdkClient;
+import com.bulbshare.sdksample.sdk.utils.BulbshareThemeOptions;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.module.annotations.ReactModule;
 
-@ReactModule(name = BulbsdkModule.NAME)
 public class BulbsdkModule extends ReactContextBaseJavaModule {
     public static final String NAME = "Bulbsdk";
 
@@ -27,6 +29,7 @@ public class BulbsdkModule extends ReactContextBaseJavaModule {
     // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
     public void multiply(int a, int b, Promise promise) {
+        BulbshareSdkClient.Companion.getInstance(getCurrentActivity()).authenticate(new AuthenticateSdkRequest(), null);
         promise.resolve(a * b);
     }
 
