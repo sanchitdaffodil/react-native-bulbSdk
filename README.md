@@ -11,11 +11,15 @@ npm install bulbsdk
 ## Usage
 
 ```js
-import { multiply } from "bulbsdk";
+import { authenticate, open } from "bulbsdk";
 
 // ...
 
-const result = await multiply(3, 7);
+const result = await authenticate("useremail", "password");
+
+
+// ... To open the sdk after authentication
+open();
 ```
 
 ## Contributing

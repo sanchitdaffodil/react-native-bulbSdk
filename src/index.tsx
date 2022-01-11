@@ -20,3 +20,12 @@ const Bulbsdk = NativeModules.Bulbsdk
 export function multiply(a: number, b: number): Promise<number> {
   return Bulbsdk.multiply(a, b);
 }
+export function authenticate(
+  username: string,
+  password: string
+): Promise<number> {
+  return Bulbsdk.authenticate(username, password);
+}
+export function open() {
+  return Bulbsdk.open();
+}
