@@ -64,19 +64,13 @@ android:exported="true"
 </manifest>
 ```
 
-- In the project level build.gradle file add this under dependancies
+- In the app level build.gradle file add this under dependancies
 
 ```sh
 implementation 'com.bulbshare:app:1.5.1'
 ```
 
-- In the project level build.gradle file add this under android
-
-```sh
-packagingOptions.pickFirst("lib/*/libc++_shared.so")
-```
-
-##### Sample build.gradle:
+##### Sample app build.gradle:
 
 ```sh
 android {
@@ -94,15 +88,54 @@ android {
 
     ... 
 }
+```
 
-dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation 'com.bulbshare:app:1.5.1'
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
-    ......
+- In the project level build.gradle file add this in repositories
+
+```sh
+maven { url 'https://maven.google.com' }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven {
+            url "https://jfrog.bulbshare.tk/artifactory/example-repo-local"
+            credentials {
+                username = "admin"
+                password = "Daffodil@123"
+            }
+        }
+
+        google()
+        maven { url 'https://www.jitpack.io' }
+```
+
+##### Sample project build.gradle:
+```sh
+allprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url("$rootDir/../node_modules/react-native/android")
+        }
+        maven {
+            // Android JSC is installed from npm
+            url("$rootDir/../node_modules/jsc-android/dist")
+        }
+        maven { url 'https://maven.google.com' }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven {
+            url "https://jfrog.bulbshare.tk/artifactory/example-repo-local"
+            credentials {
+                username = "admin"
+                password = "Daffodil@123"
+            }
+        }
+
+        google()
+        maven { url 'https://www.jitpack.io' }
+    }
 }
+
 ```
 
 ## Usage

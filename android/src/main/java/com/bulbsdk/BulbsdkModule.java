@@ -28,7 +28,7 @@ import com.facebook.react.module.annotations.ReactModule;
 @ReactModule(name = BulbsdkModule.NAME)
 public class BulbsdkModule extends ReactContextBaseJavaModule {
     public static final String NAME = "Bulbsdk";
-
+    public static boolean isAuthenticated = false;
     public BulbsdkModule(ReactApplicationContext reactContext) {
         super(reactContext);
     }
@@ -67,6 +67,7 @@ public class BulbsdkModule extends ReactContextBaseJavaModule {
 
                     @Override
                     public void onAuthenticationSuccess(AuthenticationSdkResponse response) {
+                        isAuthenticated = true;
                         promise.resolve("success");
                     }
                 });
@@ -75,53 +76,65 @@ public class BulbsdkModule extends ReactContextBaseJavaModule {
     }
     @ReactMethod
     public void open() {
-        ReactApplicationContext context = getReactApplicationContext();
-        Intent intent = new Intent(context, BulbShareActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        context.startActivity(intent);
+        if (isAuthenticated) {
+            ReactApplicationContext context = getReactApplicationContext();
+            Intent intent = new Intent(context, BulbShareActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            context.startActivity(intent);
+        }
     }
 
     @ReactMethod
     public void callBriefIntro(String briefRef) {
-        ReactApplicationContext context = getReactApplicationContext();
-        Intent intent = new Intent(context, BriefActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
-        context.startActivity(intent);
+        if (isAuthenticated) {
+            ReactApplicationContext context = getReactApplicationContext();
+            Intent intent = new Intent(context, BriefActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
+            context.startActivity(intent);
+        }
     }
 
     @ReactMethod
     public void callFeedScreen() {
-        ReactApplicationContext context = getReactApplicationContext();
-        Intent intent = new Intent(context, BulbShareActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        context.startActivity(intent);
+        if (isAuthenticated) {
+            ReactApplicationContext context = getReactApplicationContext();
+            Intent intent = new Intent(context, BulbShareActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            context.startActivity(intent);
+        }
     }
 
     @ReactMethod
     public void callBriefSurvey(String briefRef) {
-        ReactApplicationContext context = getReactApplicationContext();
-        Intent intent = new Intent(context, SurveyActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
-        context.startActivity(intent);
+        if (isAuthenticated) {
+            ReactApplicationContext context = getReactApplicationContext();
+            Intent intent = new Intent(context, SurveyActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
+            context.startActivity(intent);
+        }
     }
 
     @ReactMethod
     public void callCreateBulbShare(String briefRef) {
-        ReactApplicationContext context = getReactApplicationContext();
-        Intent intent = new Intent(context, CreateBulbshareActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
-        context.startActivity(intent);
+        if (isAuthenticated) {
+            ReactApplicationContext context = getReactApplicationContext();
+            Intent intent = new Intent(context, CreateBulbshareActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
+            context.startActivity(intent);
+        }
     }
 
     @ReactMethod
     public void callMyProfile() {
-        ReactApplicationContext context = getReactApplicationContext();
-        Intent intent = new Intent(context, ProfileActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        context.startActivity(intent);
+        if (isAuthenticated) {
+            ReactApplicationContext context = getReactApplicationContext();
+            Intent intent = new Intent(context, ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            context.startActivity(intent);
+        }
     }
 
     public static native int nativeMultiply(int a, int b);
