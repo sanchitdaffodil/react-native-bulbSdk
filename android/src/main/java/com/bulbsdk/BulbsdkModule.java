@@ -7,12 +7,18 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bulbshare.sdksample.sdk.activity.BriefActivity;
 import com.bulbshare.sdksample.sdk.activity.BulbShareActivity;
+import com.bulbshare.sdksample.sdk.activity.CreateBulbshareActivity;
+import com.bulbshare.sdksample.sdk.activity.ProfileActivity;
+import com.bulbshare.sdksample.sdk.activity.SurveyActivity;
 import com.bulbshare.sdksample.sdk.callbacks.IBulbshareAuthenticateCallback;
 import com.bulbshare.sdksample.sdk.model.AuthenticateSdkRequest;
 import com.bulbshare.sdksample.sdk.model.AuthenticationSdkResponse;
 import com.bulbshare.sdksample.sdk.model.BulbshareException;
 import com.bulbshare.sdksample.sdk.sdkClient.BulbshareSdkClient;
+import com.bulbshare.sdksample.sdk.utils.BundleConstants;
+import com.bulbshare.sdksample.sdk.utils.ThemeData;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -42,23 +48,25 @@ public class BulbsdkModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void authenticate(String username, String password, Promise promise) {
+    public void authenticate(String email, String password, Promise promise) {
+
+        ThemeData themeData = new ThemeData(R.color.color_5D6363, R.color.color_803C3C47);
+
+        BulbshareSdkClient.getInstance(getApplicationContext()).setThemeOptions(66, themeData);
+
         AuthenticateSdkRequest authenticationRequest = new AuthenticateSdkRequest();
-        authenticationRequest.setEmail("abhijeet.verma@unthinkable.co");
-        authenticationRequest.setPassword("sdktest901$");
+        authenticationRequest.setEmail(email);
+        authenticationRequest.setPassword(password);
         authenticationRequest.setAppVersion("1.2");
         BulbshareSdkClient.getInstance(getApplicationContext())
                 .authenticate(authenticationRequest, new IBulbshareAuthenticateCallback() {
                     @Override
                     public void onAuthenticationFail(BulbshareException response) {
                         promise.resolve("failed");
-
-                        //Toast.makeText(getApplicationContext(), "Auth Fail " + response.getmessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onAuthenticationSuccess(AuthenticationSdkResponse response) {
-                        //Toast.makeText(getApplicationContext(), "Auth Success", Toast.LENGTH_SHORT).show();
                         promise.resolve("success");
                     }
                 });
@@ -71,7 +79,49 @@ public class BulbsdkModule extends ReactContextBaseJavaModule {
         Intent intent = new Intent(context, BulbShareActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         context.startActivity(intent);
-        //startActivity(new Intent(this, BulbShareActivity.class));
+    }
+
+    @ReactMethod
+    public void callBriefIntro(String briefRef) {
+        ReactApplicationContext context = getReactApplicationContext();
+        Intent intent = new Intent(context, BriefActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
+        context.startActivity(intent);
+    }
+
+    @ReactMethod
+    public void callFeedScreen() {
+        ReactApplicationContext context = getReactApplicationContext();
+        Intent intent = new Intent(context, BulbShareActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        context.startActivity(intent);
+    }
+
+    @ReactMethod
+    public void callBriefSurvey(String briefRef) {
+        ReactApplicationContext context = getReactApplicationContext();
+        Intent intent = new Intent(context, SurveyActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
+        context.startActivity(intent);
+    }
+
+    @ReactMethod
+    public void callCreateBulbShare(String briefRef) {
+        ReactApplicationContext context = getReactApplicationContext();
+        Intent intent = new Intent(context, CreateBulbshareActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        intent.putExtra(BundleConstants.BRIEF_REF, briefRef);
+        context.startActivity(intent);
+    }
+
+    @ReactMethod
+    public void callMyProfile() {
+        ReactApplicationContext context = getReactApplicationContext();
+        Intent intent = new Intent(context, ProfileActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        context.startActivity(intent);
     }
 
     public static native int nativeMultiply(int a, int b);

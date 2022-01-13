@@ -1,6 +1,6 @@
 {
   "name": "bulbsdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "wrapper for bulb sdk",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

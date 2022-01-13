@@ -20,12 +20,29 @@ const Bulbsdk = NativeModules.Bulbsdk
 export function multiply(a: number, b: number): Promise<number> {
   return Bulbsdk.multiply(a, b);
 }
-export function authenticate(
-  username: string,
-  password: string
-): Promise<number> {
-  return Bulbsdk.authenticate(username, password);
+export function authenticate(email: string, password: string): Promise<number> {
+  return Bulbsdk.authenticate(email, password);
 }
 export function open() {
   return Bulbsdk.open();
+}
+
+export function callBriefIntro(briefRef: string) {
+  return Bulbsdk.callBriefIntro(briefRef);
+}
+
+export function callFeedScreen() {
+  return Bulbsdk.callFeedScreen();
+}
+
+export function callBriefSurvey(briefRef: string) {
+  return Bulbsdk.callBriefSurvey(briefRef);
+}
+
+export function callCreateBulbShare(briefRef: string) {
+  return Bulbsdk.callCreateBulbShare(briefRef);
+}
+
+export function callMyProfile() {
+  return Bulbsdk.callMyProfile();
 }
