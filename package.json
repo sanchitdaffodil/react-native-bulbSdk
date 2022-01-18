@@ -1,6 +1,6 @@
 {
   "name": "bulbsdk",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "wrapper for bulb sdk",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/sanchitdaffodil/react-native-bulbSdk",
+  "repository": "https://github.com/",
   "author": "sanchit srivastava <sanchit.srivastava@daffodilsw.com> (https://github.com/sanchitdaffodil)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sanchitdaffodil/BulbShare/issues"
+    "url": "https://github.com/"
   },
-  "homepage": "https://github.com/sanchitdaffodil/BulbShare#readme",
+  "homepage": "https://github.com/",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
