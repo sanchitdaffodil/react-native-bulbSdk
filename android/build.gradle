@@ -65,6 +65,6 @@ repositories {
 
 dependencies {
     //noinspection GradleDynamicVersion
-  implementation 'com.bulbshare:app:1.5.1'
+  implementation 'com.bulbshare:sdk:1.7.1'
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }

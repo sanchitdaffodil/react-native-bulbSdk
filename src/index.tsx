@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-
+import Colors from './colors';
 const LINKING_ERROR =
   `The package 'bulbsdk' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
@@ -46,3 +46,18 @@ export function callCreateBulbShare(briefRef: string) {
 export function callMyProfile() {
   return Bulbsdk.callMyProfile();
 }
+
+export function configSdk(data: any) {
+  return Bulbsdk.configSdk(
+    data?.primaryThemeColor || '',
+    data?.secThemeColor || '',
+    data?.profileTabColor || '',
+    data?.googleKey || '',
+    data?.fbKey || '',
+    data?.twitterKey || '',
+    data?.twitterSecret || '',
+    data?.WlaId || ''
+  );
+}
+
+export const BulbShareColours = Colors;
